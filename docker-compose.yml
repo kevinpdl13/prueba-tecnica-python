@@ -1,0 +1,59 @@
+# =========================================================================
+# Puertomar - docker-compose.yml
+# =========================================================================
+# Levanta dos servicios:
+#   1. db  → PostgreSQL 18 con el esquema inicializado automáticamente
+#   2. api → FastAPI (Uvicorn) con Python 3.14 conectada a la BD
+# =========================================================================
+
+services:
+
+  # -----------------------------------------------------------------------
+  # Servicio: PostgreSQL
+  # -----------------------------------------------------------------------
+  db:
+    image: postgres:18-bookworm
+    container_name: puertomar_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: puertomar
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: puertomar1234
+    volumes:
+      # El schema se ejecuta automáticamente la PRIMERA vez que se crea el volumen
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      # Volumen persistente — PostgreSQL 18 cambió su ruta de datos a /18/docker
+      - postgres_data:/var/lib/postgresql/18/docker
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d puertomar" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # -----------------------------------------------------------------------
+  # Servicio: FastAPI
+  # -----------------------------------------------------------------------
+  api:
+    build: .
+    container_name: puertomar_api
+    restart: unless-stopped
+    environment:
+      DB_HOST: db # nombre del servicio Docker, no localhost
+      DB_PORT: 5432
+      DB_NAME: puertomar
+      DB_USER: postgres
+      DB_PASSWORD: puertomar1234
+      API_TITLE: "Puertomar API"
+      API_VERSION: "1.0.0"
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy # espera a que PostgreSQL esté listo
+
+volumes:
+  postgres_data:

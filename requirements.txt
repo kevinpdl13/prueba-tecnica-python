@@ -1,0 +1,5 @@
+# Dependencias del proyecto Puertomar
+fastapi
+uvicorn[standard]
+psycopg[binary]
+pytest

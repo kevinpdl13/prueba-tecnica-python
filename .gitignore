@@ -1,0 +1,20 @@
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Archivos de configuración con credenciales
+.env
+
+# Caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# IDEs y editores
+.vscode/
+.idea/
+*.swp
