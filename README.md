@@ -55,7 +55,25 @@ Respuesta esperada:
 ```bash
 curl -X POST http://localhost:8000/lotes/procesar \
   -H "Content-Type: application/json" \
-  -d @data/entrada_ejemplo.json
+  -d '{
+    "lotes": [
+      {
+        "lote_id": "AT-2026-0001",
+        "producto": "Atún en aceite 170 g",
+        "autoclave": "AUT-03",
+        "inicio": "2026-08-01T08:00:00-05:00",
+        "fin": "2026-08-01T09:15:00-05:00",
+        "temperatura_minima": 116.0,
+        "temperatura_maxima": 123.0,
+        "presion_minima": 1.20,
+        "presion_maxima": 1.80,
+        "lecturas": [
+          {"fecha_hora": "2026-08-01T08:10:00-05:00", "temperatura": 117.2, "presion": 1.35},
+          {"fecha_hora": "2026-08-01T08:20:00-05:00", "temperatura": 124.1, "presion": 1.62}
+        ]
+      }
+    ]
+  }'
 ```
 
 **7. Probar el Modo CLI (Procesamiento por consola en JSON):**

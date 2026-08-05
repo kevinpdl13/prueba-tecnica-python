@@ -87,7 +87,7 @@ def _api_error(status_code: int, error_detail: str) -> JSONResponse:
     status_code=200,
     summary="Procesar lotes y persistir en BD",
     description=(
-        "Recibe el JSON de lotes (mismo formato que `data/entrada_ejemplo.json`), "
+        "Recibe el JSON de lotes"
         "procesa cada lote con las reglas de negocio, guarda los resultados "
         "en PostgreSQL y devuelve el reporte completo envuelto en la respuesta estándar."
     ),
@@ -96,69 +96,6 @@ def _api_error(status_code: int, error_detail: str) -> JSONResponse:
         500: {"description": "Error interno del servidor"},
     },
     tags=["Lotes"],
-    openapi_extra={
-        "requestBody": {
-            "content": {
-                "application/json": {
-                    "example": {
-                        "lotes": [
-                            {
-                                "lote_id": "AT-2026-0001",
-                                "producto": "Atun en aceite 170 g",
-                                "autoclave": "AUT-03",
-                                "inicio": "2026-08-01T08:00:00-05:00",
-                                "fin": "2026-08-01T09:15:00-05:00",
-                                "temperatura_minima": 116.0,
-                                "temperatura_maxima": 123.0,
-                                "presion_minima": 1.20,
-                                "presion_maxima": 1.80,
-                                "lecturas": [
-                                    {"fecha_hora": "2026-08-01T08:10:00-05:00", "temperatura": 117.2, "presion": 1.35},
-                                    {"fecha_hora": "2026-08-01T08:20:00-05:00", "temperatura": 124.1, "presion": 1.62},
-                                    {"fecha_hora": "2026-08-01T08:30:00-05:00", "temperatura": 119.0, "presion": 1.55},
-                                    {"fecha_hora": "2026-08-01T08:45:00-05:00", "temperatura": 120.5, "presion": 1.40},
-                                ],
-                            },
-                            {
-                                "lote_id": "SA-2026-0002",
-                                "producto": "Sardina en salsa de tomate 425 g",
-                                "autoclave": "AUT-01",
-                                "inicio": "2026-08-01T10:00:00-05:00",
-                                "fin": "2026-08-01T11:20:00-05:00",
-                                "temperatura_minima": 115.0,
-                                "temperatura_maxima": 121.0,
-                                "presion_minima": 1.10,
-                                "presion_maxima": 1.70,
-                                "lecturas": [
-                                    {"fecha_hora": "2026-08-01T10:10:00-05:00", "temperatura": 125.0, "presion": 1.90},
-                                    {"fecha_hora": "2026-08-01T10:25:00-05:00", "temperatura": 122.5, "presion": 1.45},
-                                    {"fecha_hora": "2026-08-01T10:40:00-05:00", "temperatura": 118.0, "presion": 1.95},
-                                    {"fecha_hora": "2026-08-01T11:00:00-05:00", "temperatura": 117.5, "presion": 1.30},
-                                ],
-                            },
-                            {
-                                "lote_id": "AT-2026-0003",
-                                "producto": "Atun en agua 170 g",
-                                "autoclave": "AUT-02",
-                                "inicio": "2026-08-01T07:00:00-05:00",
-                                "fin": "2026-08-01T08:10:00-05:00",
-                                "temperatura_minima": 116.0,
-                                "temperatura_maxima": 123.0,
-                                "presion_minima": 1.20,
-                                "presion_maxima": 1.80,
-                                "lecturas": [
-                                    {"fecha_hora": "2026-08-01T07:10:00-05:00", "temperatura": 118.0, "presion": 1.40},
-                                    {"fecha_hora": "2026-08-01T07:30:00-05:00", "temperatura": 119.5, "presion": 1.50},
-                                    {"fecha_hora": "2026-08-01T07:50:00-05:00", "temperatura": 120.0, "presion": 1.45},
-                                ],
-                            },
-                        ]
-                    }
-                }
-            },
-            "required": True,
-        }
-    },
 )
 def procesar_lotes(
     body: ProcesarLotesRequest,

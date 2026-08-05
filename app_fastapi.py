@@ -18,10 +18,13 @@ import logging
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 
 from app.core.config import settings
 from app.infrastructure.db import close_pool, init_pool
 from app.interface.api import router
+from app.interface.dtos import ApiResponse
 
 logging.basicConfig(
     level=logging.INFO,
@@ -43,12 +46,6 @@ async def lifespan(app: FastAPI):
     yield
     logger.info("Apagando Puertomar API...")
     close_pool()
-
-
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
-
-from app.interface.dtos import ApiResponse
 
 app = FastAPI(
     title=settings.api_title,

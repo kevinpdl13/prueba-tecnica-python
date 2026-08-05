@@ -114,8 +114,6 @@ def cargar_lotes_desde_dict(datos_raw: dict[str, Any]) -> list[Lote]:
     Útil para la API FastAPI: el body JSON del request se parsea con Pydantic
     y luego se pasa directamente aquí para construir los objetos de dominio.
     """
-    from app.domain.exceptions import ArchivoEntradaError  # evita import circular en top
-
     if not isinstance(datos_raw, dict) or "lotes" not in datos_raw:
         raise ArchivoEntradaError("El JSON debe contener la clave raíz 'lotes'")
 
