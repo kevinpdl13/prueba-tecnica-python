@@ -16,10 +16,7 @@ Esta aplicación, Ofrece **dos modalidades de operación 100% funcionales e inde
 
 ### Paso a Paso
 
-**1. Clonar o descomprimir el proyecto y entrar a la carpeta:**
-```bash
-cd puertomar
-```
+**1. Clonar o descomprimir el proyecto:**
 
 **2. Construir las imágenes y levantar los contenedores:**
 ```bash
