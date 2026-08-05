@@ -142,7 +142,7 @@ python main.py data/entrada_ejemplo.json
 
 ### Configuración de la Base de Datos
 
-Las credenciales de conexión están configuradas mediante el archivo `.env` en la raíz del proyecto (leído de forma nativa por `app/core/config.py`):
+Las credenciales de conexión están configuradas mediante el archivo `.env` en la raíz del proyecto (leído de forma nativa por `app/core/config.py`) de no tener el archivo .env por favor crearlo :
 
 ```env
 DB_HOST=localhost
@@ -150,6 +150,9 @@ DB_PORT=5432
 DB_NAME=basededatos
 DB_USER=postgres
 DB_PASSWORD=contraseña
+
+API_TITLE=Puertomar API
+API_VERSION=1.0.0
 ```
 
 Antes de iniciar la API REST por primera vez, asegúrese de ejecutar el script de creación de tablas y vistas:
