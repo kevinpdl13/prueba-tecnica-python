@@ -3,16 +3,12 @@
 from __future__ import annotations
 
 import os
-from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Carga automática de variables del archivo .env a os.environ
-_env_file = Path(__file__).resolve().parent.parent.parent / ".env"
-if _env_file.exists():
-    for linea in _env_file.read_text(encoding="utf-8").splitlines():
-        linea = linea.strip()
-        if linea and not linea.startswith("#") and "=" in linea:
-            k, v = linea.split("=", 1)
-            os.environ.setdefault(k.strip(), v.strip().strip("\"'"))
+load_dotenv()
+
 
 
 class Settings:
