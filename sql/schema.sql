@@ -2,23 +2,6 @@
 -- GRUPO PUERTOMAR - Control de ciclos de esterilizacion
 -- Script de creacion de esquema para PostgreSQL 18
 -- =========================================================================
--- Decisiones de diseno:
--- 1. Se separan LOTE y CICLO_ESTERILIZACION en dos tablas aunque en el
---    programa Python se modelen como una sola clase. En la base de datos
---    SI conviene separarlos porque, a futuro, un lote podria tener mas de
---    un ciclo (reprocesos), y separar respeta la 3FN: los datos del ciclo
---    (temperaturas, fechas) no dependen de la clave del lote sino de la
---    clave del propio ciclo.
--- 2. Los valores CALCULABLES (promedios, numero de alertas, porcentaje de
---    conformidad, estado) NO se guardan como columnas: se derivan con una
---    consulta (VIEW) a partir de LECTURA. Esto evita datos duplicados e
---    inconsistentes (regla del enunciado 5.4).
--- 3. Se usan claves foraneas con ON DELETE CASCADE desde LECTURA hacia
---    CICLO_ESTERILIZACION (si se elimina un ciclo, sus lecturas dejan de
---    tener sentido) y ON DELETE RESTRICT desde CICLO_ESTERILIZACION hacia
---    LOTE (no se debe poder borrar un lote que ya tiene un ciclo asociado
---    sin decision explicita).
--- =========================================================================
 
 BEGIN;
 

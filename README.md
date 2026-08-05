@@ -157,11 +157,16 @@ DB_PASSWORD=contraseña
 
 Antes de iniciar la API REST por primera vez, asegúrese de ejecutar el script de creación de tablas y vistas:
 
+**Opción 1: Desde la terminal (CLI)**
 ```bash
 psql -U postgres -d puertomar -f sql/schema.sql
 ```
-
 *(En Windows, si `psql` no está en el PATH, use la ruta completa: `"C:\Program Files\PostgreSQL\18\bin\psql.exe" -U postgres -d puertomar -f sql/schema.sql`)*.
+
+**Opción 2: Desde una herramienta gráfica (pgAdmin / DBeaver / VS Code PostgreSQL)**
+1. Abra su cliente de base de datos preferido (ej. **pgAdmin 4** o **DBeaver**).
+2. Conéctese a su servidor PostgreSQL y cree la base de datos `puertomar`.
+3. Abra el archivo `sql/schema.sql` en la herramienta Query Tool / Editor SQL y ejecútelo completo (`F5` o botón de ejecutar).
 
 ### Iniciar el Servidor API
 
