@@ -82,7 +82,7 @@ docker compose down -v
 - **Docker Desktop** (Incluye Docker Compose y no requiere instalar Python ni PostgreSQL localmente).
 
 ### Opción B: Instalación Manual / Desarrollo Local
-- **Python 3.10+** (Probado en Python 3.14)
+- **Python 3.14+** (Probado en Python 3.14)
 - **PostgreSQL 16+** (Probado en PostgreSQL 18. Requerido únicamente para el modo API REST)
 - Dependencias indicadas en `requirements.txt` (`fastapi`, `uvicorn`, `psycopg`, `pytest`)
 
